@@ -41,7 +41,14 @@ module Cwgem
             accept_client
           else
             begin
-              @handler.call(self,read_socket)
+              # Remove closed connections. An exception is raised
+              # if this is a dead socket, which we handle below
+              # by simply removing the socket.
+              if read_socket.closed? or read_socket.eof?
+                remove_client read_socket
+              else
+                @handler.call(self,read_socket)
+              end
             rescue
               remove_client read_socket
             end
