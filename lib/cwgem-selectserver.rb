@@ -81,7 +81,7 @@ module Cwgem
     # This sets a flag which will halt the main loop. The purpose of this method
     # is to allow the main loop to finish its tasks before shutting everything
     # down
-    def shutdown_server
+    def shutdown
       @server_active = false
     end
 
