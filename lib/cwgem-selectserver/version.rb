@@ -1,5 +1,5 @@
 module Cwgem
-  module SelectServer
-    VERSION = "0.0.1"
+  class SelectServer
+    VERSION = "0.1.0"
   end
 end
