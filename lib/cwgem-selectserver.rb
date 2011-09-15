@@ -39,11 +39,12 @@ module Cwgem
         readable_sockets.each do | read_socket |
           if read_socket == self
             accept_client
-          elsif read_socket.closed? or read_socket.eof?
-            exit if read_socket == self
-            remove_client read_socket
           else
-            @handler.call(self,read_socket)
+            begin
+              @handler.call(self,read_socket)
+            rescue
+              remove_client read_socket
+            end
           end
         end
 
